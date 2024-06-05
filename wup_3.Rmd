@@ -24,28 +24,44 @@ $H_0$: There is no difference between the average number of drinks imbibed betwe
 
 $H_A$: The average number drinks is different between at least two rows.
 
-## Now with ggplot - first select the basic data
+# Methods
+In the data set davisdata Seat is a categorial variable, alcohol is numerical
+
+We try to predict alcohol ~ Seat so we use the numerical~Cat.rmd helper file
+
+# Results
+
+## Descriptive results
+
+### Graphical summary
 
 ```{r}
 basicCN <- ggplot(davisdata,aes(y=alcohol,x=Seat))
 ```
-## Now add in boxplot
 
 ```{r}
 basicCN + geom_boxplot()
 ```
-  
-  
-### get fancy  
+
+This boxplot shows that the people who wit in the back drink more alcohol than the rest.
+
+### Numerical summary
 
 ```{r}
-basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
+favstats(alcohol~Seat,data=ucdavis1)
 ```
 
-## Numerical Summarys 
+The numerical summary shows that mean of the back seats having a higher alcohol consumption than the other mean representing the middle and front.
 
-## Inferential Tests
+### Inferential results
+
+```{r}
+model1 <- aov(alcohol~Seat,data=davisdata)
+summary.aov(model1)
+```
+
+The p-value is 0.000116, less than 0.05 so we reject the null hypothesis
 
 ## Conclusions
 
-
+The graphical summary showcases the alcohol consumption of the majority in the back seats, while the mean in numerical summary shows the same results of the back seats containing more consumption of alcohol, and the Inferential results showcasing the p-value being 0.000116 which was less the 0.05 that rejects the null hypothesis.
