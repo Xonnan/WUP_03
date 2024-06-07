@@ -60,8 +60,14 @@ model1 <- aov(alcohol~Seat,data=davisdata)
 summary.aov(model1)
 ```
 
-The p-value is 0.000116, less than 0.05 so we reject the null hypothesis
+The p-value is 0.000116, less than 0.05 so we reject the null hypothesis  
+There is a difference in alcohol consumption based on where people sit
+
+
+```{r}
+plot(TukeyHSD(model1))
+```
 
 ## Conclusions
 
-The graphical summary showcases the alcohol consumption of the majority in the back seats, while the mean in numerical summary shows the same results of the back seats containing more consumption of alcohol, and the Inferential results showcasing the p-value being 0.000116 which was less the 0.05 that rejects the null hypothesis.
+The results of the p-value that was rejected by the null hypothesis doesn't make a difference due to the back seats having the most people and alcohol consumption.
